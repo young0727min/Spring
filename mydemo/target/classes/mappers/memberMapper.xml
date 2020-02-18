@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.javateam.mapper.memberMapper">
+ 
+	 <select id="list" resultType="memberVO">
+	 	SELECT * FROM member_tb ORDER BY no
+	 </select>
+    
+     <select id="select" parameterType="int" resultType="memberVO">
+     	SELECT * FROM member_tb WHERE no = #{no}
+     </select>
+     
+     <insert id="insert" parameterType="memberVO">
+     	INSERT INTO member_tb(name,title,content,password,date)
+     	VALUE(#{name},#{title},#{content},#{password},now());
+     </insert>
+     
+     <update id="update" parameterType="memberVO">
+     	UPDATE member_tb SET name=#{name},title=#{title},content=#{content},password=#{password},date=now()
+     	WHERE no=#{no} AND password=#{password}
+     </update>
+     
+     <delete id="delete" parameterType="memberVO">
+     	DELETE FROM member_tb WHERE no=#{no} AND password=#{password}
+     </delete>
+</mapper>
+
